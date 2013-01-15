@@ -23,4 +23,4 @@ Hex Exploding Input is a jQuery Widget Factory plugin with Themeroller support.
  * **next_ui**: **Default: true**, add the next ui element button to the buttonset
  * **previous_ui**: **Default: true**, add the previous ui element button to the buttonset
 
-Demo located [here](http://dl.dropbox.com/u/21019978/jQuery-Hex-Input/example.html).
+Demo located [here](http://htmlpreview.github.com/?https://raw.github.com/bubasti/jQuery-Background-Changer/master/example.html)
