@@ -3,74 +3,21 @@
 $.widget( 'custom.bgchanger', {
   // default options
   options: {
-    url_path: '/static/images/bg/light',
-    images: [
-      'arab_tile.png',
-      'bright_squares.png',
-      'brushed_alu_dark.png',
-      'cardboard.png',
-      'chruch.png',
-      'climpek.png',
-      'concrete_wall_2.png',
-      'concrete_wall_3.png',
-      'diamond_upholstery.png',
-      'exclusive_paper.png',
-      'fabric_plaid.png',
-      'felt.png',
-      'frenchstucco.png',
-      'furley_bg.png',
-      'gplaypattern.png',
-      'graphy.png',
-      'greyfloral.png',
-      'grey.png',
-      'grey_sandbag.png',
-      'grunge_wall.png',
-      'handmadepaper.png',
-      'hexellence.png',
-      'husk.png',
-      'light_honeycomb.png',
-      'lightpaperfibers.png',
-      'light_toast.png',
-      'light_wool.png',
-      'little_pluses.png',
-      'mirrored_squares.png',
-      'natural_paper.png',
-      'norwegian_rose.png',
-      'old_mathematics.png',
-      'paper_2.png',
-      'project_papper.png',
-      'ravenna.png',
-      'retro_intro.png',
-      'ricepaper.png',
-      'rockywall.png',
-      'scribble_light.png',
-      'shattered.png',
-      'snow.png',
-      'soft_wallpaper.png',
-      'solid.png',
-      'square_bg.png',
-      'strange_bullseyes.png',
-      'straws.png',
-      'swirl.png',
-      'texturetastic_gray.png',
-      'vintage_speckles.png',
-      'wall4.png',
-      'white_texture.png',
-      'whitey.png',
-      'xv.png',
-    ],
+    url_path: '',
+    images: [],
     label_width: 255,
     current: '',
     apply_to: 'body',
     ui: true,
     random: false,
+    next_ui: true,
+    previous_ui: true,
 
-    // callbacks
-    change: null,
-    randomize: null,
-    previous: null,
-    next: null,
-    create: null,
+    //// callbacks
+    //change: null,
+    //randomize: null,
+    //previous: null,
+    //next: null,
   },
 
   // the constructor
@@ -84,17 +31,19 @@ $.widget( 'custom.bgchanger', {
       .addClass( 'custom-bgchanger' )
       .disableSelection();
 
-    this.prev_changer = $( '<button>', {
-      text: 'Previous',
-      'class': 'custom-bgchanger-changer-prev'
-    })
-    .appendTo( this.element )
-    .button({
-      icons: {
-        primary: 'ui-icon-carat-1-w'
-      },
-      text: false
-    });
+    if (this.options.previous_ui) {
+      this.prev_changer = $( '<button>', {
+        text: 'Previous',
+        'class': 'custom-bgchanger-changer-prev'
+      })
+      .appendTo( this.element )
+      .button({
+        icons: {
+          primary: 'ui-icon-carat-1-w'
+        },
+        text: false
+      });
+    }
 
     this.rand_changer = $( '<button>', {
       text: this.options.current,
@@ -104,17 +53,19 @@ $.widget( 'custom.bgchanger', {
     .button()
     .css('width', this.options.label_width);
 
-    this.next_changer = $( '<button>', {
-      text: 'Next',
-      'class': 'custom-bgchanger-changer-next'
-    })
-    .appendTo( this.element )
-    .button({
-      icons: {
-        primary: 'ui-icon-carat-1-e'
-      },
-      text: false
-    });
+    if (this.options.previous_ui) {
+      this.next_changer = $( '<button>', {
+        text: 'Next',
+        'class': 'custom-bgchanger-changer-next'
+      })
+      .appendTo( this.element )
+      .button({
+        icons: {
+          primary: 'ui-icon-carat-1-e'
+        },
+        text: false
+      });
+    }
 
     this.element.buttonset();
 
