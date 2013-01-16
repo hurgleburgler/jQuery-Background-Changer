@@ -94,6 +94,7 @@ $.widget( 'custom.bgchanger', {
         .menu({
           select: function(e, u) {
             $this_element.bgchanger('option', 'current', u.item.find('a').text());
+            this_element.this_menu.hide();
           },
           focus: function(e) {
             this_element.keep_focus = true;
