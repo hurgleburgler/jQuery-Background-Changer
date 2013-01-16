@@ -5,13 +5,14 @@ $.widget( 'custom.bgchanger', {
   options: {
     url_path: '',
     images: [],
-    label_width: 255,
+    width: 255,
+    height: 200,
     current: '',
     apply_to: 'body',
     ui: true,
-    random: false,
     next_ui: true,
     previous_ui: true,
+    drop_down: true,
 
     //// callbacks
     //change: null,
@@ -22,6 +23,9 @@ $.widget( 'custom.bgchanger', {
 
   // the constructor
   _create: function() {
+    this_element = this;
+    $this_element = this.element;
+
     if (this.options.current === '') {
       this.options.current = this.options.images[0];
     }
@@ -45,13 +49,72 @@ $.widget( 'custom.bgchanger', {
       });
     }
 
-    this.rand_changer = $( '<button>', {
+    this.this_button = $( '<button>', {
       text: this.options.current,
-      'class': 'custom-bgchanger-changer-rand'
-    })
-    .appendTo( this.element )
-    .button()
-    .css('width', this.options.label_width);
+      'class': 'custom-bgchanger-button'
+    });
+
+    if (this.options.drop_down) {
+      this.keep_focus = false;
+
+      this.hide_menu = function() {
+        if (!this_element.keep_focus) {
+          this_element.this_menu.hide();
+        }
+      };
+
+      this.this_button.button({
+        icons: {
+          secondary: 'ui-icon-triangle-1-s'
+        },
+      })
+      .click(function(e) {
+        this_element.this_menu.show();
+      });
+
+      this.this_menu = $( '<ul />' )
+        .css({
+          width: this.options.width,
+          height: this.options.height,
+          overflow: 'auto',
+        })
+        .hide();
+
+      for (ii in this.options.images) {
+        $( '<a />', {
+          text: this.options.images[ii],
+          href: '#',
+        })
+        .appendTo( $( '<li />' )
+          .appendTo(this.this_menu)
+        );
+      }
+
+      this.this_menu
+        .menu({
+          select: function(e, u) {
+            $this_element.bgchanger('option', 'current', u.item.find('a').text());
+          },
+          focus: function(e) {
+            this_element.keep_focus = true;
+          },
+          blur: function(e) {
+            this_element.keep_focus = false;
+            setTimeout(this_element.hide_menu, 200);
+          },
+        })
+        .appendTo( this.element.parent() );
+
+    } else {
+      this.this_button.button()
+      this._on( this.this_button, {
+        // _on won't call randomize when widget is disabled
+        click: 'randomize'
+      });
+    }
+    this.this_button
+      .css('width', this.options.width)
+      .appendTo( this.element );
 
     if (this.options.previous_ui) {
       this.next_changer = $( '<button>', {
@@ -73,11 +136,6 @@ $.widget( 'custom.bgchanger', {
     this._on( this.prev_changer, {
       // _on won't call randomize when widget is disabled
       click: 'previous'
-    });
-
-    this._on( this.rand_changer, {
-      // _on won't call randomize when widget is disabled
-      click: 'randomize'
     });
 
     this._on( this.next_changer, {
@@ -160,7 +218,7 @@ $.widget( 'custom.bgchanger', {
   // revert other modifications here
   _destroy: function() {
     // remove generated elements
-    this.rand_changer.remove();
+    this.this_button.remove();
     this.prev_changer.remove();
     this.next_changer.remove();
 
@@ -187,7 +245,7 @@ $.widget( 'custom.bgchanger', {
     //  return;
     //}
     if (key === 'current') {
-      this.rand_changer.button('option', 'label', value);
+      this.this_button.button('option', 'label', value);
     }
 
     this._super( key, value );
