@@ -47,6 +47,12 @@ $.widget( 'custom.bgchanger', {
         },
         text: false
       });
+
+      // bind click events on the changer button to the randomize method
+      this._on( this.prev_changer, {
+        // _on won't call randomize when widget is disabled
+        click: 'previous'
+      });
     }
 
     this.this_button = $( '<button>', {
@@ -117,7 +123,7 @@ $.widget( 'custom.bgchanger', {
       .css('width', this.options.width)
       .appendTo( this.element );
 
-    if (this.options.previous_ui) {
+    if (this.options.next_ui) {
       this.next_changer = $( '<button>', {
         text: 'Next',
         'class': 'custom-bgchanger-changer-next'
@@ -129,20 +135,14 @@ $.widget( 'custom.bgchanger', {
         },
         text: false
       });
+
+      this._on( this.next_changer, {
+        // _on won't call random when widget is disabled
+        click: 'next'
+      });
     }
 
     this.element.buttonset();
-
-    // bind click events on the changer button to the randomize method
-    this._on( this.prev_changer, {
-      // _on won't call randomize when widget is disabled
-      click: 'previous'
-    });
-
-    this._on( this.next_changer, {
-      // _on won't call random when widget is disabled
-      click: 'next'
-    });
 
     if (this.options.random) {
       this.randomize();
