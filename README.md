@@ -1,4 +1,4 @@
-Hex Exploding Input is a jQuery Widget Factory plugin with Themeroller support.
+Background Changer is a jQuery Widget Factory plugin with Themeroller support.
 
 ### Example:
     $('#bg-changer').bgchanger({
