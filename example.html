@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-		
+    <title>Background Changer</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css" media="all" />
 
+    <script src="https://raw.github.com/bubasti/jQuery-Drop-Down-Browser/master/jquery.ui.dropdownbrowser.js" type="text/javascript"></script>
     <script src="https://raw.github.com/bubasti/jQuery-Background-Changer/master/jquery.ui.bgchanger.js" type="text/javascript"></script>
 
     <style>
@@ -15,7 +16,7 @@
     </style>
     <script>
       $(document).ready(function() {
-        var images = [
+        var data = [
           'arab_tile.png',
           'bright_squares.png',
           'brushed_alu_dark.png',
@@ -72,26 +73,27 @@
         ];
 
         $('#bg_changer0').bgchanger({
-          images: images,
+          data: data,
           url_path: 'http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/',
           previous_ui: false,
         });
 
         $('#bg_changer1').bgchanger({
-          images: images,
+          data: data,
           url_path: 'http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/',
           previous_ui: false,
           next_ui: false,
         });
 
         $('#bg_changer2').bgchanger({
-          images: images,
+          data: data,
           url_path: 'http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/',
           drop_down: false,
         });
 
         $('#bg_changer3').bgchanger({
-          images: images,
+          data: data,
+          selected: 'brushed_alu_dark.png',
           url_path: 'http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/',
         });
       });
