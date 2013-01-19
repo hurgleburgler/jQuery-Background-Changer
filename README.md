@@ -15,6 +15,6 @@ Background Changer is a jQuery Widget Factory plugin with Themeroller support us
  
  * **url_path**: **Default: ''**, the URL path to append to each image listed in data
  * **apply_to**: **Default: 'body'**, jQuery selector to append background to
- * **Other options are inherited from my [jQuery-Drop-Down-Browser](https://github.com/bubasti/jQuery-Drop-Down-Browser)
+ * **Other options are inherited from my [jQuery-Drop-Down-Browser](https://github.com/bubasti/jQuery-Drop-Down-Browser)**
 
 Demo located [here](http://htmlpreview.github.com/?https://raw.github.com/bubasti/jQuery-Background-Changer/master/example.html)
